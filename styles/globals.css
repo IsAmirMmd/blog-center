@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: vazir;
+  src: url(../public/fonts/Vazir.woff);
+  font-weight: 400;
+}
+@font-face {
+  font-family: vazir;
+  src: url(../public/fonts/Vazir-Bold.woff);
+  font-weight: 700;
+}
+*,
+input:focus {
+  font-family: vazir;
+}
