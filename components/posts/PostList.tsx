@@ -81,7 +81,7 @@ const PostList = ({ posts }: posts) => {
               </div>
 
               <Link
-                href={`/post/${post.title}`}
+                href={`/posts/${post.hashId}/${post.slug}`}
                 className="w-full py-2 text-center bg-amber-400 rounded-lg hover:bg-amber-100 transition-all"
               >
                 مطالعه

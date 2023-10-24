@@ -21,17 +21,24 @@ declare module "@components/types" {
   };
 
   export type post = {
+    hashId: string;
     _id: string;
     title: string;
     readingTime: string;
     likesCount: number;
+    coverImage: string;
     commentsCount: number;
     author: {
       name: string;
+      biography: string;
     };
     category: {
       englishTitle: string;
+      title: string;
     };
     slug: string;
+    isBookmarked: boolean;
+    isLiked: boolean;
+    createdAt: Date;
   };
 }
