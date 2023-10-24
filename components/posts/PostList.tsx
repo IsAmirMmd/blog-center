@@ -1,26 +1,13 @@
+import { post } from "@components/types";
 import {
-  ChevronDownIcon,
-  AdjustmentsHorizontalIcon,
   BookmarkIcon,
   HeartIcon,
   ChatBubbleBottomCenterIcon,
   ClockIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 type posts = { posts: post[] };
-export type post = {
-  _id: string;
-  title: string;
-  readingTime: string;
-  likesCount: number;
-  commentsCount: number;
-  author: {
-    name: string;
-  };
-  category: {
-    englishTitle: string;
-  };
-};
 
 const PostList = ({ posts }: posts) => {
   return (
@@ -41,7 +28,7 @@ const PostList = ({ posts }: posts) => {
             <div className="rounded-xl bg-gray-50 mt-2 p-2 flex flex-col gap-y-2">
               <p className="font-bold text-lg">{post.title}</p>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center">
                   <img
                     src="https://coderpad.io/wp-content/uploads/2023/04/IMG_2713-1024x683.png"
@@ -50,10 +37,11 @@ const PostList = ({ posts }: posts) => {
                   />
                   <span>{post?.author.name}</span>
                 </div>
-
-                <span className="bg-yellow-300 text-xs rounded-xl px-2 py-1">
-                  {post?.category?.englishTitle || "ناشناس"}
-                </span>
+                <Link href={`/blogs/${post?.category?.englishTitle}`}>
+                  <span className="bg-amber-400 text-xs rounded-3xl px-2 py-1 hover:bg-yellow-500 hover:text-white transition-all">
+                    {post?.category?.englishTitle || "ناشناس"}
+                  </span>
+                </Link>
               </div>
               <div className="flex items-center justify-between">
                 <div className={`flex items-center gap-x-2`}>
@@ -92,7 +80,12 @@ const PostList = ({ posts }: posts) => {
                 </div>
               </div>
 
-              <p>خواندن</p>
+              <Link
+                href={`/post/${post.title}`}
+                className="w-full py-2 text-center bg-amber-400 rounded-lg hover:bg-amber-100 transition-all"
+              >
+                مطالعه
+              </Link>
             </div>
           </div>
         );
