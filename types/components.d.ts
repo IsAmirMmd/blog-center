@@ -40,6 +40,18 @@ declare module "@components/types" {
     isBookmarked: boolean;
     isLiked: boolean;
     createdAt: Date;
+    comments: Comment[];
     related: post[];
+  };
+
+  export type Comment = {
+    status: number;
+    _id: number;
+    writer: { _id: number; name: string };
+    postId: number;
+    responseTo: number;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
   };
 }

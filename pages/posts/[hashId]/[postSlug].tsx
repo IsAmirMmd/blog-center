@@ -12,6 +12,7 @@ import PostInteraction from "@/components/posts/PostInertaction";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import PostList from "@/components/posts/PostList";
+import PostCommment from "@/components/posts/postComment";
 
 export type Post = {
   post: post;
@@ -226,12 +227,15 @@ const PostPage = ({ post }: Post) => {
           <h2 className="font-extrabold text-2xl md:text-3xl mb-8">
             پست های مشابه
           </h2>
-          <div className="grid grid-cols-6 gap-10">
+          {/* related post */}
+          <div className="mx-2">
             <PostList posts={post.related} />
           </div>
         </section>
         {/* post comments */}
-        {/* <PostComments post={post} /> */}
+        <div className="mx-4">
+          <PostCommment post={post} />
+        </div>
       </div>
       <div className="h-32 bg-gray-50"></div>
     </div>
