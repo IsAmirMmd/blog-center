@@ -1,3 +1,4 @@
+import { MdContentCopy } from "react-icons/md";
 import { post } from "@components/types";
 import { BookmarkIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { BookmarkIcon as SolideBookmarkIcon } from "@heroicons/react/20/solid";
@@ -8,12 +9,24 @@ import { toPersianDigits } from "@/util/toPersian";
 import { IoLogoLinkedin, IoLogoTwitter } from "react-icons/io";
 import { FaTelegram } from "react-icons/fa";
 import PostInteraction from "@/components/posts/PostInertaction";
+import { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import PostList from "@/components/posts/PostList";
 
 export type Post = {
   post: post;
 };
 
 const PostPage = ({ post }: Post) => {
+  const [copied, setCopied] = useState(false);
+
+  const copyHandler = () => {
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
   return (
     <div className="py-4">
       <div className="md:max-w-screen-lg container mx-auto">
@@ -30,9 +43,9 @@ const PostPage = ({ post }: Post) => {
                 <span className="font-extrabold text-base block">
                   {post.author.name}
                 </span>
-                <Link href={`/blogs/${post.category.englishTitle}`}>
+                <Link href={`/blogs/${post?.category?.englishTitle}`}>
                   <span className="bg-white border border-blue-500 text-xs text-blue-500 px-3 py-1 mr-2 rounded-full transition-all duration-300 hover:bg-blue-500 hover:text-white  ">
-                    {post.category.title}
+                    {post?.category?.title}
                   </span>
                 </Link>
               </div>
@@ -189,20 +202,20 @@ const PostPage = ({ post }: Post) => {
                 </a>
               </div>
               <div className="relative">
-                {/* <CopyToClipboard
-                    text={`${process.env.NEXT_PUBLIC_DOMAIM_URL}/posts/${post.hashId}/${post.slug}`}
-                    onCopy={copyHandler}
-                  >
-                    <div className="bg-gray-100 border px-3 py-1 rounded-2xl text-gray-600 flex items-center gap-x-2 cursor-pointer ">
-                      <span className="text-sm md:text-base">کپی&nbsp;لینک</span>
-                      <MdContentCopy size={24} />
-                    </div>
-                  </CopyToClipboard>
-                  {copied && (
-                    <span className="absolute -top-8 left-0 bg-blue-500 px-3 py-1 rounded-2xl text-white text-sm">
-                      کپی شد
-                    </span>
-                  )} */}
+                <CopyToClipboard
+                  text={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
+                  onCopy={copyHandler}
+                >
+                  <div className="bg-gray-100 border px-3 py-1 rounded-2xl text-gray-600 flex items-center gap-x-2 cursor-pointer ">
+                    <span className="text-sm md:text-base">کپی&nbsp;لینک</span>
+                    <MdContentCopy size={24} />
+                  </div>
+                </CopyToClipboard>
+                {copied && (
+                  <span className="absolute -top-8 left-0 bg-blue-500 px-3 py-1 rounded-2xl text-white text-sm">
+                    کپی شد
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -214,7 +227,7 @@ const PostPage = ({ post }: Post) => {
             پست های مشابه
           </h2>
           <div className="grid grid-cols-6 gap-10">
-            {/* <PostList blogsData={post.related} /> */}
+            <PostList posts={post.related} />
           </div>
         </section>
         {/* post comments */}

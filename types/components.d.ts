@@ -40,5 +40,6 @@ declare module "@components/types" {
     isBookmarked: boolean;
     isLiked: boolean;
     createdAt: Date;
+    related: post[];
   };
 }
