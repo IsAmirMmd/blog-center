@@ -53,9 +53,9 @@ const PostInteraction = ({ post, isSmall, className }: PostProps) => {
         isSmall ? "gap-x-2" : "gap-x-4"
       } ${className}`}
     >
-      <button className="bg-gray-200 p-0.5 rounded flex items-center gap-x-1">
-        <ChatBubbleBottomCenterIcon className={`${iconSize} stroke-gray-500`} />
-        <span className={`${numberSize} text-gray-500 font-bold leading-3`}>
+      <button className="bg-gray-200 text-gray-500 p-0.5 rounded flex items-center gap-x-1 hover:bg-gray-500 hover:text-white transition-all">
+        <ChatBubbleBottomCenterIcon className={`${iconSize} stroke-current`} />
+        <span className={`${numberSize} font-bold leading-3`}>
           {toPersianDigits(post.commentsCount)}
         </span>
       </button>

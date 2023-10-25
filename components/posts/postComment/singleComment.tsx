@@ -13,10 +13,10 @@ const SignleComment = ({ comment, postId }: props) => {
   const [onReply, setOnreply] = useState(false);
   return (
     <div className="rounded-xl mb-8 overflow-hidden shadow-lg border border-gray-100 bg-white">
-      <div className="flex items-center justify-start bg-gray-50 px-4 py-2">
-        <UserCircleIcon className="w-12 h-12 stroke-gray-400" strokeWidth={1} />
+      <div className="flex items-center justify-start bg-[#ffc14d] px-4 py-2">
+        <UserCircleIcon className="w-12 h-12 stroke-white" strokeWidth={1} />
         <div className="flex flex-col justify-between mr-4">
-          <span className="block text-sm text-gray-600">
+          <span className="block text-sm text-slate-700">
             {comment.writer?.name}
           </span>
           <span className="block text-xs text-gray-500 mt-2 dark:text-slate-500">

@@ -1,3 +1,4 @@
+import { toPersianDigits } from "@/util/toPersian";
 import { post } from "@components/types";
 import {
   BookmarkIcon,
@@ -11,7 +12,7 @@ type posts = { posts: post[] };
 
 const PostList = ({ posts }: posts) => {
   return (
-    <div className="bg-yellow-100 p-6 rounded-2xl grid md:col-span-9 gap-6 grid-cols-6">
+    <div className="bg-[#ffc14d] p-6 rounded grid md:col-span-9 gap-6 grid-cols-6">
       {posts.map((post: post) => {
         return (
           <div
@@ -22,10 +23,10 @@ const PostList = ({ posts }: posts) => {
               <img
                 src="https://coderpad.io/wp-content/uploads/2023/04/IMG_2713-1024x683.png"
                 alt="react thumbnail"
-                className="rounded-xl aspect-video"
+                className="rounded-xl aspect-video w-full"
               />
             </div>
-            <div className="rounded-xl bg-gray-50 mt-2 p-2 flex flex-col gap-y-2">
+            <div className="rounded-xl mt-2 p-2 flex flex-col gap-y-2">
               <p className="font-bold text-lg">{post.title}</p>
 
               <div className="flex items-center justify-between mb-2">
@@ -51,7 +52,7 @@ const PostList = ({ posts }: posts) => {
                     />
                     <span className={` font-bold block text-xs`}>
                       {/* {toPersianDigits(post.commentsCount)} */}
-                      {post.commentsCount}
+                      {toPersianDigits(post.commentsCount)}
                     </span>
                   </button>
                   <button
@@ -61,28 +62,30 @@ const PostList = ({ posts }: posts) => {
                     <HeartIcon className={`stroke-red-300 w-3 h-3`} />
                     <span className={`block font-bold text-xs`}>
                       {/* {toPersianDigits(post.likesCount)} */}
-                      {post.likesCount}
+                      {toPersianDigits(post.likesCount)}
                     </span>
                   </button>
                   <button
                     // onClick={() => bookmarkHandler(post._id)}
                     className="bg-blue-100 text-blue-500 p-0.5 rounded flex items-center gap-x-1 hover:bg-blue-500 hover:text-white transition-all"
                   >
-                    <BookmarkIcon className={`stroke-blue-300 w-3 h-3`} />
+                    <BookmarkIcon className={`stroke-blue-300 w-4 h-4`} />
                   </button>
                 </div>
 
                 <div className="flex items-center text-[10px] text-gray-400 font-bold">
                   <ClockIcon className="w-4 h-4 stroke-gray-400 ml-1" />
                   <span className="ml-1">زمان مطالعه:</span>
-                  <span className="ml-1 leading-3">{post.readingTime}</span>
+                  <span className="ml-1 leading-3">
+                    {toPersianDigits(parseInt(post.readingTime))}
+                  </span>
                   <span>دقیقه</span>
                 </div>
               </div>
 
               <Link
                 href={`/posts/${post.hashId}/${post.slug}`}
-                className="w-full py-2 text-center bg-amber-400 rounded-lg hover:bg-amber-100 transition-all"
+                className="w-full py-2 text-center bg-[#ffc14d] rounded-lg hover:bg-amber-100 transition-all"
               >
                 مطالعه
               </Link>

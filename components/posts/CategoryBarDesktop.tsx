@@ -8,15 +8,15 @@ const CategoryBarDesktop = (categories: Categories) => {
 
   return (
     <div className="hidden md:block md:row-span-2 md:col-span-3">
-      <div className="bg-white rounded-2xl overflow-hidden">
+      <div className="bg-white rounded overflow-hidden">
         {/* accordion header */}
         <div
-          className="flex justify-between p-4 cursor-pointer bg-yellow-100"
+          className="flex justify-between p-4 cursor-pointer bg-[#ffc14d]"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span>دسته بندی مقالات</span>
           <ChevronDownIcon
-            className={`stroke-yellow-500 w-6 h-6 transition-all ${
+            className={`stroke-black w-6 h-6 transition-all ${
               isOpen ? "rotate-180" : "rotate-0"
             }`}
           />

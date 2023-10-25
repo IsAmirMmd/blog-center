@@ -11,7 +11,15 @@ type props = {
 const PostCommment = ({ post }: props) => {
   return (
     <div>
-      <h2>نظرات</h2>
+      <h2 className="text-2xl font-bold">نظرات</h2>
+      {/* base form */}
+      <CommentForm
+        postId={parseInt(post._id)}
+        responseTo={0}
+        setOnreply={() => {}}
+      />
+
+      {/* comment list */}
       {post.comments.map((comment: Comment, index: number) => {
         return (
           !comment.responseTo &&
@@ -27,13 +35,6 @@ const PostCommment = ({ post }: props) => {
           )
         );
       })}
-
-      {/* base form */}
-      <CommentForm
-        postId={parseInt(post._id)}
-        responseTo={0}
-        setOnreply={() => {}}
-      />
     </div>
   );
 };

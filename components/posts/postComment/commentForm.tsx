@@ -31,7 +31,7 @@ const CommentForm = ({ postId, responseTo, setOnreply }: props) => {
   };
 
   return (
-    <form className="bg-yellow-100 mt-8 p-4 rounded-md">
+    <form className="bg-yellow-100 mb-8 mt-4 p-4 rounded-md">
       <h3 className="font-bold text-2xl mt-2">ارسال دیدگاه جدید</h3>
 
       <textarea

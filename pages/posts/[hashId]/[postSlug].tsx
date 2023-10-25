@@ -223,21 +223,22 @@ const PostPage = ({ post }: Post) => {
           <div className="border-t-2 border-gray-500 rounded w-full mb-8"></div>
         </section>
         {/* related posts */}
-        <section className="mb-20">
-          <h2 className="font-extrabold text-2xl md:text-3xl mb-8">
-            پست های مشابه
-          </h2>
-          {/* related post */}
-          <div className="mx-2">
-            <PostList posts={post.related} />
-          </div>
-        </section>
+        {post.related.length !== 0 && (
+          <section className="mb-20">
+            <h2 className="font-extrabold text-2xl md:text-3xl mb-8">
+              پست های مشابه
+            </h2>
+            {/* related post */}
+            <div className="mx-2">
+              <PostList posts={post.related} />
+            </div>
+          </section>
+        )}
         {/* post comments */}
         <div className="mx-4">
           <PostCommment post={post} />
         </div>
       </div>
-      <div className="h-32 bg-gray-50"></div>
     </div>
   );
 };
