@@ -5,7 +5,7 @@ import SortBar from "@/components/posts/sortbar";
 import Layout from "@/container/Layout/Layout";
 import { HomeProps } from "@components/types";
 import axios from "axios";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextApiRequest } from "next";
 
 export default function Home({ data, categories }: HomeProps) {
   return (
@@ -24,9 +24,19 @@ export default function Home({ data, categories }: HomeProps) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSideProps) {
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+  context
+) => {
+  const { req } = context;
+
   const { data } = await axios.get(
-    "http://localhost:5000/api/posts?page=1&limit=10"
+    "http://localhost:5000/api/posts?page=1&limit=10",
+    {
+      withCredentials: true,
+      headers: {
+        Cookie: req.headers.cookie,
+      },
+    }
   );
 
   const { data: categories } = await axios.get(
@@ -39,4 +49,4 @@ export async function getServerSideProps(context: GetServerSideProps) {
       categories,
     },
   };
-}
+};

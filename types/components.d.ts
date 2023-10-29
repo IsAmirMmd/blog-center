@@ -22,7 +22,7 @@ declare module "@components/types" {
 
   export type post = {
     hashId: string;
-    _id: string;
+    _id: number;
     title: string;
     readingTime: string;
     likesCount: number;

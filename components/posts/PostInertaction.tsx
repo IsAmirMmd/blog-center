@@ -12,13 +12,16 @@ import {
 } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { httpRunner } from "../../service/httpService";
+import routerPush from "@/util/routerPush";
+import toast from "react-hot-toast";
+httpRunner();
 
 type PostProps = {
   post: post;
   isSmall: boolean;
   className: string;
 };
-
 const PostInteraction = ({ post, isSmall, className }: PostProps) => {
   const iconSize = isSmall ? "h-4 w-4" : "h-6 w-6";
   const numberSize = isSmall ? "text-xs" : "text-base";
@@ -26,25 +29,27 @@ const PostInteraction = ({ post, isSmall, className }: PostProps) => {
 
   const likeHandler = (postId: number) => {
     axios
-      .put(`/posts/like/${postId}`)
+      .put(`/api/posts/like/${postId}`, {
+        withCredentials: true,
+      })
       .then(({ data }) => {
-        // routerPush(router);
-        // toast.success(data.message);
+        routerPush(router);
+        toast.success(data.message);
       })
       .catch((err) => {
-        // toast.error(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message);
       });
   };
 
   const bookmarkHandler = (postId: number) => {
     axios
-      .put(`/posts/bookmark/${postId}`)
+      .put(`http://localhost:5000/api/posts/bookmark/${postId}`)
       .then(({ data }) => {
-        // toast.success(data.message);
-        // routerPush(router);
+        toast.success(data.message);
+        routerPush(router);
       })
       .catch((err) => {
-        // toast.error(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message);
       });
   };
   return (
@@ -60,7 +65,7 @@ const PostInteraction = ({ post, isSmall, className }: PostProps) => {
         </span>
       </button>
       <button
-        onClick={() => likeHandler(parseInt(post._id))}
+        onClick={() => likeHandler(post._id)}
         className="bg-red-100 p-0.5 rounded flex items-center gap-x-1 text-red-500
       hover:bg-red-500 hover:text-red-100 transition-all  
       "
@@ -75,7 +80,7 @@ const PostInteraction = ({ post, isSmall, className }: PostProps) => {
         </span>
       </button>
       <button
-        onClick={() => bookmarkHandler(parseInt(post._id))}
+        onClick={() => bookmarkHandler(post._id)}
         className="bg-blue-100 text-blue-500 p-0.5 rounded flex items-center gap-x-1
       hover:bg-blue-500 hover:text-white transition-all"
       >

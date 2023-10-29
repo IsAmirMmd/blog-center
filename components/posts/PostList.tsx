@@ -7,6 +7,7 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import PostInteraction from "./PostInertaction";
 
 type posts = { posts: post[] };
 
@@ -45,33 +46,7 @@ const PostList = ({ posts }: posts) => {
                 </Link>
               </div>
               <div className="flex items-center justify-between">
-                <div className={`flex items-center gap-x-2`}>
-                  <button className="bg-gray-200 p-0.5 text-gray-500 rounded flex items-center gap-x-1 hover:bg-slate-500 hover:text-gray-100 transition-all">
-                    <ChatBubbleBottomCenterIcon
-                      className={`w-3 h-3 stroke-gray-400`}
-                    />
-                    <span className={` font-bold block text-xs`}>
-                      {/* {toPersianDigits(post.commentsCount)} */}
-                      {toPersianDigits(post.commentsCount)}
-                    </span>
-                  </button>
-                  <button
-                    // onClick={() => likeHandler(post._id)}
-                    className="bg-red-100 p-0.5 rounded flex items-center gap-x-1 text-red-500 hover:bg-red-500 hover:text-red-100 transition-all"
-                  >
-                    <HeartIcon className={`stroke-red-300 w-3 h-3`} />
-                    <span className={`block font-bold text-xs`}>
-                      {/* {toPersianDigits(post.likesCount)} */}
-                      {toPersianDigits(post.likesCount)}
-                    </span>
-                  </button>
-                  <button
-                    // onClick={() => bookmarkHandler(post._id)}
-                    className="bg-blue-100 text-blue-500 p-0.5 rounded flex items-center gap-x-1 hover:bg-blue-500 hover:text-white transition-all"
-                  >
-                    <BookmarkIcon className={`stroke-blue-300 w-4 h-4`} />
-                  </button>
-                </div>
+                <PostInteraction className="" isSmall={true} post={post} />
 
                 <div className="flex items-center text-[10px] text-gray-400 font-bold">
                   <ClockIcon className="w-4 h-4 stroke-gray-400 ml-1" />
