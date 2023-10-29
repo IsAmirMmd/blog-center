@@ -2,11 +2,13 @@ import { FormikValues, useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Layout from "@/container/Layout/Layout";
 import Input from "@/components/posts/FormInput";
+import toast from "react-hot-toast";
+import { useAuth, useAuthAction } from "@/context/AuthContext";
 
 //  initial values
 const initialValues = {
@@ -24,8 +26,17 @@ const validationSchema = Yup.object({
 
 const SigninForm: React.FC = () => {
   const router = useRouter();
+  const dispacth = useAuthAction();
+  const { userInfo } = useAuth();
+
   //  onSubmit
-  const onSubmit = (values: FormikValues) => {};
+  const onSubmit = async (values: FormikValues) => {
+    dispacth && dispacth({ type: "SIGNIN", payload: values });
+  };
+
+  useEffect(() => {
+    userInfo && router.push("/");
+  }, [userInfo]);
 
   const formik = useFormik({
     initialValues,
@@ -37,7 +48,7 @@ const SigninForm: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>ثبت نام - بلاگ سنتر</title>
+        <title>ورود - بلاگ سنتر</title>
       </Head>
       <div className="md:max-w-md px-4 md:px-4 container  mx-auto h-[80vh]">
         <form

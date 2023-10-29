@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/container/Layout/Layout";
 import Input from "@/components/posts/FormInput";
+import { useAuth, useAuthAction } from "@/context/AuthContext";
 
 //  initial values
 const initialValues = {
@@ -36,10 +37,22 @@ const validationSchema = Yup.object({
 
 const SignupForm = () => {
   const router = useRouter();
+  const dispacth = useAuthAction();
+  const { userInfo } = useAuth();
+
+  useEffect(() => {
+    userInfo && router.push("/");
+  }, [userInfo]);
 
   //  onSubmit
   const onSubmit = (values: FormikValues) => {
     const { name, email, phoneNumber, password } = values;
+
+    dispacth &&
+      dispacth({
+        type: "SIGNUP",
+        payload: { name, email, phoneNumber, password },
+      });
   };
 
   const formik = useFormik({
