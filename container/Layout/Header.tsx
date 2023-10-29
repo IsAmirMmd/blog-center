@@ -1,12 +1,13 @@
-import { useAuth } from "@/context/AuthContext";
+import { useAuth, useAuthAction } from "@/context/AuthContext";
 import Link from "next/link";
 
 const Header = () => {
   const { userInfo } = useAuth();
+  const dispatch = useAuthAction();
 
   return (
-    <header className="p-4 shadow-md z-50 mb-4 shadow-[#ffc14d]">
-      <nav className="container lg:max-w-screen-xl flex justify-between mx-auto">
+    <header className="shadow-md z-50 mb-4 shadow-[#ffc14d]">
+      <nav className="container p-4 h-16 lg:max-w-screen-xl items-center flex justify-between mx-auto">
         <div className="flex gap-4">
           {!userInfo ? (
             <>
@@ -14,7 +15,17 @@ const Header = () => {
               <Link href="/signup">ثبت نام</Link>
             </>
           ) : (
-            <Link href="/profile">پروفایل - {userInfo.name}</Link>
+            <div className="flex items-center gap-x-4">
+              <button
+                className="rounded px-3 py-1 bg-red-600 text-red-100"
+                onClick={() =>
+                  dispatch && dispatch({ type: "LOGOUT", payload: {} })
+                }
+              >
+                خروج
+              </button>
+              <Link href="/profile">پروفایل - {userInfo.name}</Link>
+            </div>
           )}
         </div>
         <div>
