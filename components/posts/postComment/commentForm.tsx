@@ -1,14 +1,17 @@
+import routerPush from "@/util/routerPush";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 type props = {
   postId: number;
-  responseTo: number;
+  responseTo: number | null;
   setOnreply: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CommentForm = ({ postId, responseTo, setOnreply }: props) => {
   const [commentValue, setCommentValue] = useState("");
+  const router = useRouter();
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +23,12 @@ const CommentForm = ({ postId, responseTo, setOnreply }: props) => {
     };
 
     axios
-      .post("http://localhost:5000/api/post-comment/save-comment", data)
+      .post("http://localhost:5000/api/post-comment/save-comment", data, {
+        withCredentials: true,
+      })
       .then((res) => {
         setCommentValue("");
+        routerPush(router);
         if (setOnreply) setOnreply((open) => !open);
       })
       .catch((err) => {
