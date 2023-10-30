@@ -2,6 +2,7 @@ import routerPush from "@/util/routerPush";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 type props = {
   postId: number;
@@ -27,11 +28,13 @@ const CommentForm = ({ postId, responseTo, setOnreply }: props) => {
         withCredentials: true,
       })
       .then((res) => {
+        toast.success("مرسی که نظرتو با ما به اشتراک گذاشتی :)");
         setCommentValue("");
         routerPush(router);
         if (setOnreply) setOnreply((open) => !open);
       })
       .catch((err) => {
+        toast.error("احتمالا یه مشکلی تو ارتباط با سرور وجود داشته باشه!");
         console.error(err);
       });
   };

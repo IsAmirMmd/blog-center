@@ -6,7 +6,7 @@ const Header = () => {
   const dispatch = useAuthAction();
 
   return (
-    <header className="shadow-md z-50 mb-4 shadow-[#ffc14d]">
+    <header className="shadow-md z-50 mb-4 shadow-[#ffc14d] sticky top-0 bg-white">
       <nav className="container p-4 h-16 lg:max-w-screen-xl items-center flex justify-between mx-auto">
         <div className="flex gap-4">
           {!userInfo ? (
