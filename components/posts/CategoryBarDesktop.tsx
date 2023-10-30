@@ -1,10 +1,12 @@
 import { Categories, Category } from "@components/types";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const CategoryBarDesktop = (categories: Categories) => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const { query } = useRouter();
 
   return (
     <div className="hidden md:block md:row-span-2 md:col-span-3">
@@ -28,11 +30,17 @@ const CategoryBarDesktop = (categories: Categories) => {
             isOpen ? "block" : "hidden"
           } [&_a]:pr-4 [&_a]:block [&>*]:py-2 [&>*]:transition-all hover:[&>*]:bg-amber-100`}
         >
-          <li>
+          <li className={`${!query.categorySlug && "bg-amber-100 font-bold"}`}>
             <Link href="/blogs">همه مقالات</Link>
           </li>
           {categories.data.map((category: Category) => (
-            <li key={category?._id}>
+            <li
+              key={category?._id}
+              className={`${
+                category.englishTitle === query.categorySlug &&
+                "bg-amber-100 font-bold "
+              }`}
+            >
               <Link href={`/blogs/${category?.englishTitle}`}>
                 {category?.title}
               </Link>

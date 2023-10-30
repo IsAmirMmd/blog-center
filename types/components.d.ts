@@ -2,6 +2,8 @@ declare module "@components/types" {
   export type Data = {
     data: {
       docs: post[];
+      totalPages: number;
+      page: number;
     };
   };
 

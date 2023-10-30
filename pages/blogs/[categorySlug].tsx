@@ -19,7 +19,7 @@ export default function CategoryPage({ data, categories }: HomeProps) {
         {/* sort bar desktop */}
         <SortBar />
         {/* post list */}
-        <PostList posts={data.data.docs} />
+        <PostList data={data} posts={data.data.docs} />
       </main>
     </Layout>
   );

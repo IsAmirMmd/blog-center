@@ -6,6 +6,8 @@ import Layout from "@/container/Layout/Layout";
 import { HomeProps } from "@components/types";
 import axios from "axios";
 import { GetServerSideProps, NextApiRequest } from "next";
+import queryString from "query-string";
+import Pagination from "@mui/material/Pagination";
 
 export default function Home({ data, categories }: HomeProps) {
   return (
@@ -18,7 +20,7 @@ export default function Home({ data, categories }: HomeProps) {
         {/* sort bar desktop */}
         <SortBar />
         {/* post list */}
-        <PostList posts={data.data.docs} />
+        <PostList data={data} posts={data.data.docs} />
       </main>
     </Layout>
   );
@@ -27,10 +29,10 @@ export default function Home({ data, categories }: HomeProps) {
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   context
 ) => {
-  const { req } = context;
+  const { req, query } = context;
 
   const { data } = await axios.get(
-    "http://localhost:5000/api/posts?page=1&limit=10",
+    `http://localhost:5000/api/posts?${queryString.stringify(query)}`,
     {
       withCredentials: true,
       headers: {
